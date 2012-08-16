@@ -36,6 +36,9 @@ class GDash
 
       @intervals = options.delete(:intervals) || []
 
+      # Default interval
+      @default_interval = options.delete(:default_interval) || { :from => "-1hour", :to => "now" }
+
       @top_level = Hash.new
       Dir.entries(@graph_templates).each do |category|
         if File.directory?("#{@graph_templates}/#{category}")
@@ -89,7 +92,7 @@ class GDash
     end
 
     get '/:category/:dash/full/?*' do
-      options = {}
+      options = {}.merge(@default_interval)
       params["splat"] = params["splat"].first.split("/")
 
       params["columns"] = params["splat"][0].to_i || @graph_columns
@@ -114,7 +117,7 @@ class GDash
     end
 
     get '/:category/:dash/?*' do
-      options = {}
+      options = {}.merge(@default_interval)
       params["splat"] = params["splat"].first.split("/")
 
       case params["splat"][0]
@@ -157,6 +160,7 @@ class GDash
 
         hash
       end
+
     end
   end
 end

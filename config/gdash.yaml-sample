@@ -28,3 +28,6 @@
     - [ "-1day", "1 day" ]
     - [ "-1month", "1 month" ]
     - [ "-1year", "1 year" ]
+  :default_interval:
+    :from: "-1hour"
+    :to: "now"
