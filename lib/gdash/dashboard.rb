@@ -31,7 +31,7 @@ class GDash
       options[:from] ||= graph_from
       options[:until] ||= graph_until
 
-      graphs = Dir.entries(directory).select{|f| f.match(/\.graph$/)}
+      graphs = Dir.entries(directory).select{|f| f.match(/^[^.].*\.graph$/)}
 
       overrides = options.reject { |k,v| v.nil? }
 
